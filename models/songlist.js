@@ -1,6 +1,6 @@
-const jwt = require('jsonwebtoken');
 const Joi = require('joi');
 const mongoose = require('mongoose');
+const { Song } = require('./songs');
 
 const songlistSchema = new mongoose.Schema({
   name: {
@@ -13,6 +13,16 @@ const songlistSchema = new mongoose.Schema({
   songs: [{type: mongoose.Schema.Types.ObjectId, ref:"Song"}]
 });
 
+songlistSchema.post("findOneAndRemove", async function(doc) {
+  if (doc) {
+    const deleteResult = await Song.deleteMany({
+      listid: doc._id
+    });
+    console.log("Child delete result: ", deleteResult);
+  }
+});
+
+
 
 const Songlist = mongoose.model('Songlist', songlistSchema);
 
@@ -24,6 +34,7 @@ function validatesonglist(songlist) {
 
   return schema.validate(songlist);
 }
+
 
 
 function validate(req,res) {
