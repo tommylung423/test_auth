@@ -1,0 +1,11 @@
+---
+application:
+  name: "test-auth"
+  project: "test-auth"
+  organization: "QoveryCommunity"
+routers:
+- name: "main-test-auth"
+  routes:
+  - application_name: "test-auth"
+    paths:
+    - "/*"
