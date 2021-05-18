@@ -1,0 +1,13 @@
+---
+application:
+  name: "test-auth"
+  project: "test-auth"
+  organization: "QoveryCommunity"
+  port: 8000
+
+routers:
+  - name: "main-test-auth"
+    routes:
+      - application_name: "test-auth"
+        paths:
+          - "/*"
