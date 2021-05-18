@@ -11,7 +11,7 @@ const router = express.Router();
 router.post('/', auth,async (req, res) => {
   const { error } = validatesong(req.body); 
   if (error) return res.status(400).send(error.details[0].message);
-  let song = new Song({ name: req.body.name, urlid: req.body.urlid, start: req.body.start, end: req.body.end, listid: req.body.listid });
+  let song = new Song({ name: req.body.name, url: req.body.url, start: req.body.start, end: req.body.end, listid: req.body.listid });
   try{
       const songlist = await Songlist.findOne({_id: req.body.listid})       
       if (songlist) {
@@ -69,7 +69,7 @@ router.put('/updatesong/:id', auth,async (req, res) => {
   const { error } = validatesong(req.body); 
   if (error) return res.status(400).send(error.details[0].message);
   const song = await Song.findByIdAndUpdate(req.params.id,
-    { name: req.body.name, urlid: req.body.urlid, start: req.body.start, end: req.body.end}, { new: true });
+    { name: req.body.name, url: req.body.url, start: req.body.start, end: req.body.end}, { new: true });
   if (!song) return res.status(404).send('The song with the given ID was not found.');  
   res.send(song);
 });

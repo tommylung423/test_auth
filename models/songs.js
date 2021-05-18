@@ -7,7 +7,7 @@ const songSchema = new mongoose.Schema({
     minlength: 1,
     maxlength: 150
   },
-  urlid: {type: String,
+  url: {type: String,
     required: true
   },
   start:{type:Number},
@@ -22,7 +22,7 @@ const Song = mongoose.model('Song', songSchema);
 function validatesong(song) {
   const schema = Joi.object({
     name: Joi.string().min(1).max(150).required(),
-    urlid: Joi.string().required(),
+    url: Joi.string().required(),
     start: Joi.number().required(),
     end: Joi.number().required(),
     listid: Joi.objectId().required()
